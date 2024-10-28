@@ -2,7 +2,7 @@ import { Upload } from "@/components/Upload";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export default async function () {
+export default async function uploadPage() {
   const session = await getServerSession();
   if (!session) {
     redirect("/");
