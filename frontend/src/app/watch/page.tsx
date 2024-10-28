@@ -5,7 +5,7 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 import prisma from "@/db";
 import { redirect } from "next/navigation";
 
-export default async function ({
+export default async function watchPage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
