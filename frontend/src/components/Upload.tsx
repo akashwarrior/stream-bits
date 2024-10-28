@@ -43,7 +43,7 @@ export function Upload({ id }: { id: string }) {
       chunkFormData.append("chunkIndex", i.toString());
 
       uploadPromises.push(
-        axios.post("http://localhost:3001/upload/initiate", chunkFormData, {
+        axios.post(process.env.NEXT_PUBLIC_UPLOAD_URL as string + "/initiate", chunkFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -61,11 +61,13 @@ export function Upload({ id }: { id: string }) {
     formData.append("filename", video.name);
     formData.append("id", id);
 
-    await axios.put(process.env.NEXT_PUBLIC_UPLOAD_URL as string, formData, {
+    await axios.put(process.env.NEXT_PUBLIC_UPLOAD_URL as string + "/complete", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
+
+    alert("done");
   };
 
   return (
