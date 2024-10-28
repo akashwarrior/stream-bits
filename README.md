@@ -87,6 +87,8 @@ Start the transcoding service:
 
 ```bash
 cd transcode-service
+mkdir downloads
+mkdir output
 npm start
 ```
 
