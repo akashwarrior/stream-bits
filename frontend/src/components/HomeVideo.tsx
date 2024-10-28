@@ -35,7 +35,7 @@ export function HomeVideo({ video }: { video: Video }) {
 
       videoRef.current!.currentTime = parseFloat(durationRef.current?.value ?? "0");
       videoRef.current!.addEventListener("timeupdate", () => {
-        videoRef.current?.currentTime ? durationRef.current!.value = videoRef.current.currentTime.toString() : "";
+        durationRef.current!.value = videoRef.current!.currentTime.toString();
       });
       videoRef.current!.play();
     } else {
