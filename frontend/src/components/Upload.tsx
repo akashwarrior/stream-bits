@@ -59,9 +59,9 @@ export function Upload({ id }: { id: string }) {
     formData.append("author", author);
     formData.append("thumbnail", thumbnail);
     formData.append("filename", video.name);
-    formData.append("id", "1");
+    formData.append("id", id);
 
-    await axios.put("http://localhost:3001/upload/complete", formData, {
+    await axios.put(process.env.NEXT_PUBLIC_UPLOAD_URL as string, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -72,7 +72,7 @@ export function Upload({ id }: { id: string }) {
     <div className="mx-auto max-w-lg p-10">
       <div className="mb-4">
         <input
-          className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+          className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-black"
           type="text"
           name="title"
           id="title"
@@ -82,7 +82,7 @@ export function Upload({ id }: { id: string }) {
       </div>
       <div className="mb-4">
         <input
-          className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+          className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-black"
           type="text"
           name="description"
           id="description"
@@ -92,7 +92,7 @@ export function Upload({ id }: { id: string }) {
       </div>
       <div className="mb-4">
         <input
-          className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+          className="px-3 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500 text-black"
           type="text"
           name="author"
           id="author"
