@@ -29,13 +29,17 @@ export function HomeVideo({ video }: { video: Video }) {
         videoRef.current!.src = video.url;
       }
 
-      videoRef!.current?.addEventListener('loadeddata', () => {
+      videoRef!.current?.addEventListener("loadeddata", () => {
         durationRef.current!.max = videoRef.current!.duration.toString();
       });
 
-      videoRef.current!.currentTime = parseFloat(durationRef.current?.value ?? "0");
+      videoRef.current!.currentTime = parseFloat(
+        durationRef.current?.value ?? "0"
+      );
       videoRef.current!.addEventListener("timeupdate", () => {
-        durationRef.current!.value = videoRef.current!.currentTime.toString();
+        durationRef.current?.value &&
+          (durationRef.current!.value =
+            videoRef.current?.currentTime.toString() ?? "0");
       });
       videoRef.current!.play();
     } else {
@@ -43,7 +47,7 @@ export function HomeVideo({ video }: { video: Video }) {
     }
 
     return () => {
-      videoRef.current?.removeEventListener("timeupdate", () => { });
+      videoRef.current?.removeEventListener("timeupdate", () => {});
       videoRef.current?.pause();
     };
   }, [isPlaying]);
@@ -52,7 +56,9 @@ export function HomeVideo({ video }: { video: Video }) {
     <div
       onClick={(e) => {
         if (e.target instanceof HTMLInputElement) return;
-        router.push(`/watch?v=${video.id}&t=${durationRef.current?.value.toString()}`)
+        router.push(
+          `/watch?v=${video.id}&t=${durationRef.current?.value.toString()}`
+        );
       }}
       onMouseEnter={() => setIsPlaying(true)}
       onMouseLeave={() => setIsPlaying(false)}
@@ -85,7 +91,7 @@ export function HomeVideo({ video }: { video: Video }) {
       <div className="p-4">
         <h2 className="text-lg font-semibold mb-2">{video.title}</h2>
         <p className="text-gray-700">{video.author}</p>
-        <p className="text-gray-700">{video.description}</p>
+        <p className="text-gray-700 max-h-8 truncate">{video.description}</p>
       </div>
     </div>
   );

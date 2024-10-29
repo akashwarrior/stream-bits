@@ -14,6 +14,7 @@ model User {
   videos   Video[]
 
   @@index([email])
+  @@index([id])
 }
 
 model Video {

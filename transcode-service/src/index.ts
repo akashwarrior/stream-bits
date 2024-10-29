@@ -18,16 +18,11 @@ async function main() {
         callback: async (messages) => {
             const { userId, filename, title, description, author, thumbnail } = messages;
             await blobService.donwloadVideo(filename);
-            let duration = 0;
-            ffmpeg.ffprobe(`downloads/${filename}`, (err, metadata) => {
-                duration = metadata.format.duration ?? 0;
-            })
             const video = await prisma.video.create({
                 data: {
                     title,
                     description,
                     author,
-                    duration,
                     userId: Number(userId),
                     thumbnail: `http://localhost:10000/devstoreaccount1/thumbnail/${thumbnail}`,
                     url: `http://localhost:10000/devstoreaccount1/upload/${filename}`
