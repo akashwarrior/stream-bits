@@ -1,10 +1,9 @@
 import { HomeVideo } from "@/components/HomeVideo";
 import { NavBar } from "@/components/NavBar";
+import Revalidate from "@/components/Revalidate";
 import prisma from "@/db";
-import { revalidatePath } from "next/cache";
 
-revalidatePath("/");
-
+Revalidate();
 export default async function Home() {
   const videos = await prisma.video.findMany({ take: 10 });
 

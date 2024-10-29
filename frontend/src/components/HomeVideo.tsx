@@ -37,9 +37,9 @@ export function HomeVideo({ video }: { video: Video }) {
         durationRef.current?.value ?? "0"
       );
       videoRef.current!.addEventListener("timeupdate", () => {
-        durationRef.current?.value &&
-          (durationRef.current!.value =
-            videoRef.current?.currentTime.toString() ?? "0");
+        if (durationRef.current?.value !== undefined)
+          durationRef.current!.value =
+            videoRef.current?.currentTime.toString() ?? "0";
       });
       videoRef.current!.play();
     } else {
